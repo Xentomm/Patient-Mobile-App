@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         vpAdapter.addFragment(new ProfileFragment(), "Profile");
         vpAdapter.addFragment(new MedicineFragment(), "Medicine");
         viewPager.setAdapter(vpAdapter);
+        viewPager.setCurrentItem(1);
 
     }
 }

@@ -1,30 +1,33 @@
 package com.example.patientmobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView userIcon = findViewById(R.id.userIcon);
-        TextView userName = findViewById(R.id.userName);
-        TextView userEmail = findViewById(R.id.userEmail);
-        TextView userInfo = findViewById(R.id.userInfo);
+        tabLayout = findViewById(R.id.tableswipe);
+        viewPager = findViewById(R.id.viewpager);
 
-        String userNameText = "John Doe";
-        String userEmailText = "john.doe@example.com";
-        String userInfoText = "Software Developer";
+        tabLayout.setupWithViewPager(viewPager);
 
-        userName.setText(userNameText);
-        userEmail.setText(userEmailText);
-        userInfo.setText(userInfoText);
+        VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        vpAdapter.addFragment(new DoctorFragment(), "Doctor");
+        vpAdapter.addFragment(new ProfileFragment(), "Profile");
+        vpAdapter.addFragment(new MedicineFragment(), "Medicine");
+        viewPager.setAdapter(vpAdapter);
 
-        userIcon.setImageResource(R.drawable.default_user_icon);
     }
 }

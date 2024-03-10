@@ -23,8 +23,12 @@ public class DoctorFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView);
         doctor_add_button = view.findViewById(R.id.doctor_add_button);
-
-        // Set up your RecyclerView and FloatingActionButton here
+        doctor_add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
         return view;
     }

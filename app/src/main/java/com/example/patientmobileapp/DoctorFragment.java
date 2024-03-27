@@ -27,7 +27,7 @@ public class DoctorFragment extends Fragment {
         doctor_add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddDoctorActivity.class);
+                Intent intent = new Intent(getActivity(), AddAppointmentActivity.class);
                 startActivity(intent);
             }
         });

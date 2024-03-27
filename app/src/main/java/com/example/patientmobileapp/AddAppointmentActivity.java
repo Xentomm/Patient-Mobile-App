@@ -8,17 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-public class AddDoctorActivity extends AppCompatActivity {
+public class AddAppointmentActivity extends AppCompatActivity {
 
-    private Button btnShowDatePicker;
-    private Button btnTimePicker;
-    final Calendar c = Calendar.getInstance();
-    int hour = c.get(Calendar.HOUR_OF_DAY);
-    int minute = c.get(Calendar.MINUTE);
+    private Button btnShowDatePicker, btnTimePicker, btnAddAppointment;
+
+    EditText name_input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,19 @@ public class AddDoctorActivity extends AppCompatActivity {
 
         btnShowDatePicker = findViewById(R.id.select_date);
         btnTimePicker = findViewById(R.id.select_time);
+        btnAddAppointment = findViewById(R.id.add_appointment);
+
+        name_input = findViewById(R.id.doctor_name);
+
+        btnAddAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Database myDB = new Database(AddAppointmentActivity.this);
+                myDB.addAppointment(name_input.getText().toString().trim(),
+                        btnShowDatePicker.getText().toString().trim(),
+                        btnTimePicker.getText().toString().trim());
+            }
+        });
     }
 
     public void showDatePickerDialog(View v) {

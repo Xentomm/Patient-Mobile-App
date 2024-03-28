@@ -1,6 +1,7 @@
 package com.example.patientmobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog;
@@ -15,7 +16,7 @@ import java.util.Calendar;
 
 public class AddAppointmentActivity extends AppCompatActivity {
 
-    private Button btnShowDatePicker, btnTimePicker, btnAddAppointment;
+    private Button btnShowDatePicker, btnTimePicker, btnAddAppointment, btnBack;
 
     EditText name_input;
 
@@ -27,6 +28,7 @@ public class AddAppointmentActivity extends AppCompatActivity {
         btnShowDatePicker = findViewById(R.id.select_date);
         btnTimePicker = findViewById(R.id.select_time);
         btnAddAppointment = findViewById(R.id.add_appointment);
+        btnBack = findViewById(R.id.back_button);
 
         name_input = findViewById(R.id.doctor_name);
 
@@ -37,6 +39,12 @@ public class AddAppointmentActivity extends AppCompatActivity {
                 myDB.addAppointment(name_input.getText().toString().trim(),
                         btnShowDatePicker.getText().toString().trim(),
                         btnTimePicker.getText().toString().trim());
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -68,7 +76,7 @@ public class AddAppointmentActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String selectedTime = hourOfDay + ":" + minute;
-                        btnTimePicker.setText(selectedTime); // Set selected time on button
+                        btnTimePicker.setText(selectedTime);
                     }
                 }, hourOfDay, minute, true);
 

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -52,7 +54,16 @@ public class MainActivity extends AppCompatActivity {
         vpAdapter.addFragment(new ProfileFragment(), "Profile");
         vpAdapter.addFragment(new MedicineFragment(), "Medicine");
         viewPager.setAdapter(vpAdapter);
-        viewPager.setCurrentItem(1);
+        Intent intent = getIntent();
+        String previousActivityName = intent.getStringExtra("previousDoctor");
+        Log.d("PreviousActivity", "Previous Activity: " + previousActivityName);
+        if ("AddAppointmentActivity".equals(previousActivityName)) {
+            viewPager.setCurrentItem(0);
+        }
+//        Log.d("PreviousActivity", "Previous Activity: " + previousActivityName);
+        if (previousActivityName == null) {
+            viewPager.setCurrentItem(1);
+        }
     }
 
     void storeDataInArray() {

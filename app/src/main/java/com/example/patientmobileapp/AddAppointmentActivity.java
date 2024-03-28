@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ public class AddAppointmentActivity extends AppCompatActivity {
     private Button btnShowDatePicker, btnTimePicker, btnAddAppointment, btnBack;
 
     EditText name_input;
+    DoctorFragment doctorFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,10 @@ public class AddAppointmentActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+//                onBackPressed();
+                Intent intent = new Intent(AddAppointmentActivity.this, MainActivity.class);
+                intent.putExtra("previousDoctor", AddAppointmentActivity.class.getSimpleName());
+                startActivity(intent);
             }
         });
     }

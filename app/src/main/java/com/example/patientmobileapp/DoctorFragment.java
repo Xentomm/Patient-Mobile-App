@@ -45,7 +45,6 @@ public class DoctorFragment extends Fragment {
             ArrayList<String> appointment_date = bundle.getStringArrayList("appointment_date");
             ArrayList<String> appointment_time = bundle.getStringArrayList("appointment_time");
 
-
             customAdapter = new CustomAdapter(getActivity(), appointment_id, doctor_name, appointment_date, appointment_time);
             recyclerView.setAdapter(customAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

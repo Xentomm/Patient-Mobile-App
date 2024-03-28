@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    FragmentManager fragmentManager;
-
     Database myDB;
     ArrayList<String> appointment_id, doctor_name, appointment_date, appointment_time;
 

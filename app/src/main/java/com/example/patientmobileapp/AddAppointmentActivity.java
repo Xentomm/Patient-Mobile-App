@@ -50,10 +50,10 @@ public class AddAppointmentActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddAppointmentActivity.this, MainActivity.class);
                 intent.putExtra("previousDoctor", AddAppointmentActivity.class.getSimpleName());
                 startActivity(intent);
+                finish();
             }
         });
     }
-
     public void showDatePickerDialog(View v) {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);

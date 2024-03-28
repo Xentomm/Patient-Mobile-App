@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
     Database myDB;
     ArrayList<String> appointment_id, doctor_name, appointment_date, appointment_time;
 
@@ -56,16 +55,14 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(vpAdapter);
         Intent intent = getIntent();
         String previousActivityName = intent.getStringExtra("previousDoctor");
-        Log.d("PreviousActivity", "Previous Activity: " + previousActivityName);
+//        Log.d("PreviousActivity", "Previous Activity: " + previousActivityName);
         if ("AddAppointmentActivity".equals(previousActivityName)) {
             viewPager.setCurrentItem(0);
         }
-//        Log.d("PreviousActivity", "Previous Activity: " + previousActivityName);
         if (previousActivityName == null) {
             viewPager.setCurrentItem(1);
         }
     }
-
     void storeDataInArray() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {

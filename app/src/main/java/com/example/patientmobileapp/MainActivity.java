@@ -1,9 +1,7 @@
 package com.example.patientmobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.database.Cursor;
@@ -18,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
     Database myDB;
     ArrayList<String> appointment_id, doctor_name, appointment_date, appointment_time;
 
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         doctorFragment.setArguments(bundle);
 
         VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        vpAdapter.addFragment(doctorFragment, "Doctor");
+        vpAdapter.addFragment(doctorFragment, "Doctor"); // Add the fragment with arguments
         vpAdapter.addFragment(new ProfileFragment(), "Profile");
         vpAdapter.addFragment(new MedicineFragment(), "Medicine");
         viewPager.setAdapter(vpAdapter);

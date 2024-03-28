@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,6 +49,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView appointment_id_text, doctor_name_text, appointment_date_text, appointment_time_text;
+        LinearLayout appointmentLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             appointment_id_text = itemView.findViewById(R.id.appointment_id_text);

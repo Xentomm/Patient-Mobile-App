@@ -20,7 +20,6 @@ public class AddAppointmentActivity extends AppCompatActivity {
     private Button btnShowDatePicker, btnTimePicker, btnAddAppointment, btnBack;
 
     EditText name_input;
-    DoctorFragment doctorFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

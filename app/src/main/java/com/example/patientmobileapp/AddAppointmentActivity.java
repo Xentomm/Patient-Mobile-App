@@ -40,6 +40,10 @@ public class AddAppointmentActivity extends AppCompatActivity {
                 myDB.addAppointment(name_input.getText().toString().trim(),
                         btnShowDatePicker.getText().toString().trim(),
                         btnTimePicker.getText().toString().trim());
+                Intent intent = new Intent(AddAppointmentActivity.this, MainActivity.class);
+                intent.putExtra("previousDoctor", AddAppointmentActivity.class.getSimpleName());
+                startActivity(intent);
+                finish();
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {

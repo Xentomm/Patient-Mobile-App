@@ -2,8 +2,10 @@ package com.example.patientmobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +21,7 @@ import java.util.Calendar;
 public class UpdateActivity extends AppCompatActivity {
 
     EditText doctor_name;
-    Button date_up, time_up, update_button, back_button;
+    Button date_up, time_up, update_button, back_button, delete_button;
     String id, name, date, time;
 
     @Override
@@ -31,16 +33,29 @@ public class UpdateActivity extends AppCompatActivity {
         date_up = findViewById(R.id.select_date_up);
         time_up = findViewById(R.id.select_time_up);
         update_button = findViewById(R.id.update_appointment);
+        delete_button = findViewById(R.id.delete_appointment);
 
         getAndSetIntentData();
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Database myDB = new Database(UpdateActivity.this);
-                Log.d("Data", "Data onClick: " + id + doctor_name.getText().toString() + date_up.getText().toString() + time_up.getText().toString());
+//                Log.d("Data", "Data onClick: " + id + doctor_name.getText().toString() + date_up.getText().toString() + time_up.getText().toString());
                 myDB.updateData(id, doctor_name.getText().toString(), date_up.getText().toString(), time_up.getText().toString());
+                Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
+                intent.putExtra("previousDoctor", UpdateActivity.class.getSimpleName());
+                startActivity(intent);
+                finish();
             }
         });
+
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmDialog();
+            }
+        });
+
         back_button = findViewById(R.id.back_button_up);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +74,7 @@ public class UpdateActivity extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             date = getIntent().getStringExtra("date");
             time = getIntent().getStringExtra("time");
-            Log.d("Data", "Data in get and set: " + id + name + date + time);
+//            Log.d("Data", "Data in get and set: " + id + name + date + time);
 
             doctor_name.setText(name);
             date_up.setText(date);
@@ -67,6 +82,30 @@ public class UpdateActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    void confirmDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete " + name + "?");
+        builder.setMessage("Are you sure?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Database myDB = new Database(UpdateActivity.this);
+                myDB.deleteOneRow(id);
+                Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
+                intent.putExtra("previousDoctor", UpdateActivity.class.getSimpleName());
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
     }
 
     public void showDatePickerDialog(View v) {

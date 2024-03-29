@@ -54,6 +54,16 @@
       app:layout_constraintTop_toBottomOf="@+id/select_time_up" />
 
   <Button
+      android:id="@+id/delete_appointment"
+      android:layout_width="match_parent"
+      android:layout_height="70dp"
+      android:text="Delete"
+      android:backgroundTint="#680c07"
+      android:textAllCaps="false"
+      app:layout_constraintTop_toBottomOf="@+id/update_appointment"
+      tools:layout_editor_absoluteX="30dp" />
+
+  <Button
       android:id="@+id/back_button_up"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

@@ -49,7 +49,6 @@ public class AddAppointmentActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                onBackPressed();
                 Intent intent = new Intent(AddAppointmentActivity.this, MainActivity.class);
                 intent.putExtra("previousDoctor", AddAppointmentActivity.class.getSimpleName());
                 startActivity(intent);

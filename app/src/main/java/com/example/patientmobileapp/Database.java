@@ -16,10 +16,15 @@ public class Database extends SQLiteOpenHelper {
     private static final Integer DATABASE_VERSION = 1;
 
     private static final String APPOINTMENTS_TABLE_NAME = "appointments";
+    private static final String MEDICINE_TABLE_NAME = "medicine";
     private static final String COLUMN_ID = "_id";
     private static final String DOCTOR_COLUMN_NAME = "doctor_name";
     private static final String APPOINTMENT_DATE = "appointment_date";
     private static final String APPOINTMENT_TIME = "appointment_time";
+
+    private static final String MEDICINE_COLUMN_NAME = "medicine_name";
+    private static final String MEDICINE_FREQ = "medicine_freq";
+    private static final String MEDICINE_TIME = "medicine_time";
 
     Database(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,7 +38,15 @@ public class Database extends SQLiteOpenHelper {
                 DOCTOR_COLUMN_NAME + " TEXT, " +
                 APPOINTMENT_DATE + " DATE, " +
                 APPOINTMENT_TIME + " TIME);";
+
+        String query2 = "CREATE TABLE " + MEDICINE_TABLE_NAME +
+                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                MEDICINE_COLUMN_NAME + " TEXT, " +
+                MEDICINE_FREQ + " TEXT, " +
+                MEDICINE_TIME + " TIME);";
+
         db.execSQL(query);
+        db.execSQL(query2);
     }
 
     @Override
@@ -57,8 +70,34 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    Cursor readAllData() {
+    void addMedicine(String name, String freq, String time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(MEDICINE_COLUMN_NAME, name);
+        cv.put(MEDICINE_FREQ, freq);
+        cv.put(MEDICINE_TIME, time);
+        long result = db.insert(MEDICINE_TABLE_NAME, null, cv);
+        if(result == -1) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    Cursor readAllAppData() {
         String query = "SELECT * FROM " + APPOINTMENTS_TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    Cursor readAllMedData() {
+        String query = "SELECT * FROM " + MEDICINE_TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

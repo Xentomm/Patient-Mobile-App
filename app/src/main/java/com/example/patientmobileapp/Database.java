@@ -122,9 +122,34 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    void updateMedData(String row_id, String name, String freq, String time) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(MEDICINE_COLUMN_NAME, name);
+        cv.put(MEDICINE_FREQ, freq);
+        cv.put(MEDICINE_TIME, time);
+
+        long result = db.update(MEDICINE_TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     void deleteOneRow(String row_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(APPOINTMENTS_TABLE_NAME, "_id=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void deleteOneMedRow(String row_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(MEDICINE_TABLE_NAME, "_id=?", new String[]{row_id});
         if (result == -1) {
             Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
         }else {

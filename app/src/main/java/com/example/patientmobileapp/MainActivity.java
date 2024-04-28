@@ -71,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(vpAdapter);
         Intent intent = getIntent();
         String previousActivityName = intent.getStringExtra("previousDoctor");
-//        Log.d("PreviousActivity", "Previous Activity: " + previousActivityName);
+        Log.d("PreviousActivity", "Previous Activity: " + previousActivityName);
         if ("AddAppointmentActivity".equals(previousActivityName)) {
             viewPager.setCurrentItem(0);
         }
         if ("AddMedicineActivity".equals(previousActivityName)) {
+            viewPager.setCurrentItem(2);
+        }
+        if ("UpdateMedActivity".equals(previousActivityName)) {
             viewPager.setCurrentItem(2);
         }
         if (previousActivityName == null) {

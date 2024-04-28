@@ -74,7 +74,7 @@ public class UpdateActivity extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             date = getIntent().getStringExtra("date");
             time = getIntent().getStringExtra("time");
-//            Log.d("Data", "Data in get and set: " + id + name + date + time);
+            Log.d("Data", "Data in get and set: " + id + name + date + time);
 
             doctor_name.setText(name);
             date_up.setText(date);

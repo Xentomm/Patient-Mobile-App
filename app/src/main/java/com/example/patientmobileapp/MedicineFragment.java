@@ -19,7 +19,7 @@ public class MedicineFragment extends Fragment {
 
     RecyclerView recyclerView;
     FloatingActionButton medicine_add_button;
-    CustomAdapter customAdapter;
+    CustomMedAdapter customMedAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,8 +42,8 @@ public class MedicineFragment extends Fragment {
             ArrayList<String> medicine_freq = bundle.getStringArrayList("medicine_freq");
             ArrayList<String> medicine_time = bundle.getStringArrayList("medicine_time");
 
-            customAdapter = new CustomAdapter(getActivity(), medicine_id, medicine_name, medicine_freq, medicine_time);
-            recyclerView.setAdapter(customAdapter);
+            customMedAdapter = new CustomMedAdapter(getActivity(), medicine_id, medicine_name, medicine_freq, medicine_time);
+            recyclerView.setAdapter(customMedAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
 
